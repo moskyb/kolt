@@ -29,7 +29,7 @@ defmodule Kolt.MixProject do
   defp package() do
     [
       name: "kolt",
-      files: ~w(lib .formatter.exs mix.exs README* license*),
+      files: ~w(lib .formatter.exs mix.exs README* LICENSE*),
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/moskyb/kolt"}
     ]
@@ -40,7 +40,8 @@ defmodule Kolt.MixProject do
     [
       {:brod, "~> 3.7"},
       {:telemetry, "~> 0.4.0"},
-      {:mimic, "~> 0.3.0", only: :test}
+      {:mimic, "~> 0.3.0", only: :test},
+      {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
 end
