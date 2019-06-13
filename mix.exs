@@ -29,8 +29,7 @@ defmodule Kolt.MixProject do
   defp package() do
     [
       name: "kolt",
-      files: ~w(lib priv .formatter.exs mix.exs README* readme* LICENSE*
-                  license* CHANGELOG* changelog* src),
+      files: ~w(lib .formatter.exs mix.exs README* license*),
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/moskyb/kolt"}
     ]
