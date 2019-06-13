@@ -49,7 +49,7 @@ defmodule MyApplication do
     tree =
       [
         # ...
-        {OffsetLagMonitor, [["consumer_group_one", "consumer_group_two"], :cool_client]},
+        {Kolt.Monitor, [%Kolt.Monitor{consumer_group_ids: ["consumer_group_one", "consumer_group_two"], kafka_client: :cool_client, poll_delay: 2_000}]},
         # ...
       ]
 
@@ -59,7 +59,7 @@ defmodule MyApplication do
 end
 ```
 
-Once this GenServer is in place, Kolt will check offset lags every 10 seconds, and output them using [BEAM Telemetry](https://github.com/beam-telemetry/telemetry). This means that to consume the metrics Kolt produces, you'll need to attach a function to Kolt's telemetry stream.
+Once this GenServer is in place, Kolt will check offset lags every 10 seconds (by default, you can set the `poll_delay` field on the `%Kolt.Monitor` struct to any number of milliseconds), and output them using [BEAM Telemetry](https://github.com/beam-telemetry/telemetry). This means that to consume the metrics Kolt produces, you'll need to attach a function to Kolt's telemetry stream.
 
 Kolt outputs telemetry in the namespace `[:kafka, :topic, :offset_lag]`, so you'll to call `:telemetry.attach/4` on this namespace. I recommend doing this in your application's start method:
 ```elixir
@@ -80,4 +80,8 @@ end
 ```
 
 ## Thanks
+
+Initial development was sponsored by Sailthru. Thanks Sailthru!
+
+[Come work with us.](https://www.sailthru.com/careers/)
 
